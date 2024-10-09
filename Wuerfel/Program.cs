@@ -148,7 +148,7 @@ namespace Wuerfel
             Dice d6 = new Dice(6);
             Dice d4 = new Dice(4);
 
-            int wuerfe = 1;
+            int wuerfe = 0;
             while (wuerfe == 0)
             {
                 Console.WriteLine("How many times do you want to throw your dice? (Default = 1)");
@@ -164,7 +164,7 @@ namespace Wuerfel
                     Console.Clear();
                 }
 
-                if (wuerfe < 50)
+                if (wuerfe > 50)
                 {
                     string rlly;
                     Console.WriteLine($"Do you really want to roll {wuerfe} times?");
@@ -179,13 +179,17 @@ namespace Wuerfel
                         {
                             case "n":
                             case "no": wuerfe = 0; run = false; break;
-                            case "y": 
+                            case "y":
                             case "yes": run = false; break;
                             default: Console.WriteLine("wrong input!"); Console.ReadKey(); Console.Clear(); break;
                         }
 
                     }
 
+                }
+                else if (wuerfe == 0)
+                {
+                    wuerfe++;
                 }
 
             }
@@ -208,6 +212,7 @@ namespace Wuerfel
                     case "d4": reture = d4.Wuerfel(); break;
                 }
                 summe += reture;
+                Console.WriteLine(reture);
             }
 
             Console.WriteLine();
@@ -233,7 +238,6 @@ namespace Wuerfel
 
         }
 
-
     }
     // Würfel Klasse
     public class Dice
@@ -247,8 +251,7 @@ namespace Wuerfel
             Program.ColorSwitch();
             Console.WriteLine();
 
-            int wurf = zahl.Next(1, 101);
-            Console.WriteLine(wurf);
+            int wurf = zahl.Next(1, _dice);
 
             return wurf;
         }
